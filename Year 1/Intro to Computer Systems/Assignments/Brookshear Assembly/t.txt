@@ -1,0 +1,9 @@
+MOV 5 -> R0
+MOV 1 -> R1
+MOV 0 -> R2
+MOV loop -> R3
+
+loop: ADDI R1, R2 -> R2
+JMPNE R3, R2
+
+stop: HALT

@@ -1,0 +1,47 @@
+//  Setup registers
+                MOV     11100000b -> R7
+                MOV     80 -> R1
+                MOV     7 -> R2
+                MOV     1 -> R3
+                MOV     shift_left -> R4
+                MOV     0 -> R5
+                MOV     3 -> R6
+                MOV     write_loop -> R8
+
+//  Write the first row
+write_loop:     MOV     R7 -> R0
+                MOV     R2 -> [R1]
+                ADDI    R1, R3 -> R1
+                MOV     R2 -> [R1]
+                ADDI    R1, R3 -> R1
+                MOV     R2 -> [R1]
+                ADDI    R1, R3 -> R1
+                MOV     R2 -> [R1]
+                ADDI    R1, R3 -> R1
+                MOV     R0 -> R7
+                MOV     R6 -> R0
+                ADDI    R5, R3 -> R5
+                JMPLT   R8, R5
+                MOV     R7 -> R0
+                MOV     0 -> R5
+                JMPNE   R4, R2
+                JMPEQ   stop, R2
+
+//  Shift R2 one place to the left, check if R2
+//  is equal to R0 and if so change to shift_right.
+shift_left:     ROT     R2, 7
+                JMPEQ   shift_change, R2
+                JMP     write_loop
+
+//  Change to shift_right
+shift_change:   MOV     shift_right -> R4
+                MOV     00000111b -> R7
+                JMP     write_loop
+
+//  Shift R2 one place to the right and check if R2
+//  is equal to R0, if so, stop the program.
+shift_right:    JMPEQ   stop, R2
+                ROT     R2, 1
+                JMP     write_loop
+
+stop:           HALT
