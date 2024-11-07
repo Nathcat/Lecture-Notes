@@ -1,0 +1,5 @@
+Greedy algorithms make the best _local_ choices, they don't backtrack and change their previous choices even if changing such a choice would make the solution closer to optimal overall. 
+
+This is a very efficient way to solve a problem, since it simply runs through all the choices and makes the best ones in the moment without really thinking about the bigger picture of the problem.
+
+For a problem such as the [Unweighted interval scheduling problem](https://en.wikipedia.org/wiki/Interval_scheduling#Unweighted), this could produce a valid solution very efficiently. But in the context of a weighted instance of [this problem](https://en.wikipedia.org/wiki/Interval_scheduling#Weighted), a greedy approach is no longer viable, since it does not ensure that the weights are prioritised over the convenience of the choice. A better approach here would be a _Dynamic programming_ approach such as _Divide-and-conquer_.
