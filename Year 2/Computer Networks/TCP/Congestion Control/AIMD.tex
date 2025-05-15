@@ -1,0 +1,12 @@
+\subsubsection{AIMD}
+
+Rate starts at 1 MSS.
+
+\textit{\textbf{A}dditive \textbf{I}ncrease} --- Senders increase rate by 1 MSS every RTT until loss.
+
+\textit{\textbf{M}ultiplicative \textbf{D}ecrease} --- Rate is decreased on every loss:
+
+\begin{itemize}
+    \item \textit{Reno} --- Rate is halved on every loss.
+    \item \textit{Tahoe} --- Rate is set to 1 MSS on every loss.
+\end{itemize}

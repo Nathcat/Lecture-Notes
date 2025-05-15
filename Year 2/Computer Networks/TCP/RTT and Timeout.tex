@@ -1,0 +1,22 @@
+\subsection{RTT and timeout}
+
+\textbf{Round Trip Time (RTT)} --- The time for a segment to arrive at the endpoint, plus the time for the ACK to return to the sender.
+
+\textbf{Timeout} --- The time after which if an ACK has not been received, a packet is considered lost.
+
+The timeout parameter in TCP is determined using the RTT and two scalar constants, $\alpha$ and $\beta$.
+
+\begin{equation}
+    RTT_{est}^{k+1} = (1-\alpha)\cdot RTT_{est}^k + \alpha\cdot RTT_{sample}^k
+\end{equation}
+
+Generally, $\alpha = 0.125$
+
+\begin{equation}
+    \begin{split}
+        timeout^{k+1} &= RTT_{est}^{k+1}+4\cdot RTT_{dev}^{k+1} \\
+        RTT_{dev}^{k+1} &= (1-\beta)\cdot RTT_{dev}^k + \beta |RTT_{sample}^k - RTT_{est}^k|
+    \end{split}
+\end{equation}
+
+Generally, $\beta=0.25$.

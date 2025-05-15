@@ -1,0 +1,9 @@
+\subsubsection{Slow Start}
+
+Initially, $cwnd=1\cdot MSS$.
+
+Then, $cwnd\times 2$ every RTT, implemented by incrementing cwnd by MSS on receipt of every ACK.
+
+When $cwnd\geq ssthresh$, $cwnd + (MSS\cdot\frac{MSS}{cwnd})$ on receipt of every ACK within RTT.
+
+$ssthresh$ is defined as $\frac{1}{2}cwnd$ at the last loss event.

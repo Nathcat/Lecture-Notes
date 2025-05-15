@@ -1,0 +1,11 @@
+\subsection{3-Way Handshake}
+
+The client will send a SYN packet to the endpoint, $SYN_F=1$, with an
+arbitrarily chosen starting sequence number, $Seq=x$.
+
+The endpoint will reply with a SYN/ACK packet, $SYN_F=1, ACK_F=1, ACK=x+1$,
+with another arbitrarily chosen sequence number, $Seq=y$.
+
+The client will then reply to this SYN/ACK with an ACK, $ACK_F=1, ACK=y+1$.
+After the server receives this, both hosts are live and the connection
+is established (ESTAB).

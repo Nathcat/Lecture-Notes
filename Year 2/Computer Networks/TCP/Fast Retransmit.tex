@@ -1,0 +1,16 @@
+\subsection{Fast Retransmit}
+
+A host may send multiple packets in quick succession, one or more
+of these packets may be lost. Upon receiving a packet, the receiver
+will reply with an ACK.\ If the sequence number of the incoming packet
+is not what the receiver expected, it will reply with the same ACK
+as the last packet which was correctly in sequence.
+
+If the sender receives \textit{three duplicate acknowledgements}
+in a row, it will retransmit from the smallest sequence number which
+has not yet been ACKed.
+
+This might all occur \textit{before} a timeout occurs for the lost
+packet. The receipt of three duplicate ACKs indicates to the sender
+that a packet has been lost, and it does not need to wait for the
+timeout to confirm loss.

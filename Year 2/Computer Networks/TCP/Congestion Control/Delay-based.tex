@@ -1,0 +1,18 @@
+\subsubsection{Delay-based Congestion Control}
+
+This approach aims to keep the bottleneck link busy, but not full,
+thus avoiding high delay times and buffering.
+
+$RTT_{min}=\textrm{The minimum observed RTT (uncongested path).}$
+
+\begin{equation}
+    \begin{split}
+        \textrm{Uncongested throughput }\lambda_+ &= \frac{cwnd}{RTT_{min}} \\
+        \textrm{Measured throughput }\lambda_{act} &= \frac{\textrm{\# of bytes sent}}{RTT_{measured}}
+    \end{split}
+\end{equation}
+
+If $\lambda_{act}$ is close to $\lambda_+$, then $cwnd+\beta$, otherwise if $\lambda_{act}$ is far below $\lambda_+$, then $cwnd-\beta$.
+Where $\beta$ is some predefined constant.
+
+This method controls congestion without forcing / inducing a loss event, and maximises throughput with minimal delays.

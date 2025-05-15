@@ -1,0 +1,11 @@
+\subsubsection{CUBIC}
+
+Alternative approach to increasing rate from AIMD.
+
+$W_{max}=\textrm{Rate at which last congestion loss occurred}$.
+
+The rate $W$ is increased by a cubic function dependent on the current time, $T$, and the time when $W$ should equal $W_{max}$, $K$:
+
+\begin{equation}
+    \Delta W = (T-K)^3
+\end{equation}

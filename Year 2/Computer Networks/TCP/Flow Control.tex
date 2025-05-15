@@ -1,0 +1,11 @@
+\subsection{Flow Control}
+
+A receiving host should set the \textit{receive window}
+field of its ACK replies to advertise its free buffer space.
+
+The sender should then limit its' sending rate to the receiver's
+stated \textit{receive window (rwnd)}.
+
+This solves the issue in which the Network layer delivers packets faster
+than the application layer can process them, thus filling
+the receiver buffer, leading to packet loss.

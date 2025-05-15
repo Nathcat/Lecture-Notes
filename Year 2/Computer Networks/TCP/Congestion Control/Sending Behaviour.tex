@@ -1,0 +1,18 @@
+\subsubsection{Sending Behaviour}
+
+A sender has a \textit{Congestion Window (cwnd)}. The cwnd is defined
+as the bytes starting from the first unACKed byte, to the last availale byte
+(a set of these may already be in-flight but unACKed).
+
+The sender will send all the bytes within its' cwnd, wait RTT for ACKs, update the cwnd, and start again.
+
+\begin{equation}
+    rate \approx \frac{cwnd}{RTT}bytes / second
+\end{equation}
+
+\begin{equation}
+    \textrm{last byte sent} - \textrm{last byte acked} \leq cwnd
+\end{equation}
+
+The cwnd is adjusted based on the observed congestion, thus limiting the rate
+at which the sender sends packets.
