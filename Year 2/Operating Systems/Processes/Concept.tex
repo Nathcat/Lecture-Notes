@@ -1,0 +1,51 @@
+\subsubsection{What is a process}
+
+A \textit{Process} is a \textit{Program} in execution. A Program then is a passive entity
+on the physical storage disk. A Process is a Program in execution. Note that a Program might
+contain multiple Processes. A Process is an active entity.
+
+
+\subsubsection{Memory Layout}
+
+The layout of a program in memory is as follows:
+
+\begin{enumerate}
+    \item Stack --- Temporary, local scope data (params, local variables).
+    \item Heap --- Dynamically allocated memory (e.g. Malloc).
+    \item Data --- Global variables
+    \item Text --- Executable code
+\end{enumerate}
+
+There is sufficient space between the Stack and Heap sections to allow them to expand.
+
+
+\subsubsection{State}
+
+\begin{itemize}
+    \item New --- Being created
+    \item Running
+    \item Waiting --- Waiting for the result of some event
+    \item Ready --- Waiting to be allocated to a process
+    \item Terminated
+\end{itemize}
+
+
+\subsubsection{Process Control Block --- PCB}
+
+\begin{itemize}
+    \item State
+    \item Number
+    \item Program Counter
+    \item CPU Register contents
+    \item Memory info --- Memory limits, list of open files, etc\ldots
+    \item Accounting info --- CPU used, Clock time elapsed since start.
+\end{itemize}
+
+
+\subsubsection{Threads}
+
+Threads are facilitated through the use of multiple program counters in the PCB.
+
+This allows multiple locations in the code to be executed at once.
+The effect is the outward appearance of multiple processes which share
+resources, and are able to exploit concurrency.
