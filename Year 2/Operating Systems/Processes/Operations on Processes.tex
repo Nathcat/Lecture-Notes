@@ -1,0 +1,52 @@
+\subsection{Operations on Processes}
+
+
+\subsubsection{Context Switches}
+
+CPU undergoes a context switch to change active processes.
+
+Current process state (PCB) is saved, and new process state is loaded.
+
+The time this takes is pure overhead, and is completely dependent
+on the hardware support for this process. Some CPUs for example
+have multiple sets of registers, allowing them to have multiple contexts
+loaded at the same time.
+
+
+\subsubsection{Process Creation}
+
+Parent processes can create child processes. Every process has an ID (PID) which
+it managed through.
+
+There are different options for how parent and child processes can share resources (or not):
+\begin{itemize}
+    \item Parent and child share all resources.
+    \item Children share subset of parent's resources.
+    \item Parent and child share no resources.
+\end{itemize}
+
+There are also options for how processes can be executed:
+\begin{itemize}
+    \item Parent and child are executed concurrently.
+    \item Parent waits for child to terminate.
+\end{itemize}
+
+The child process can be a duplicate of the parent or
+it can have a new program loaded into it.
+\begin{itemize}
+    \item \textit{fork} --- Creates new process
+    \item \textit{exec} --- Syscall after fork to replace processes' memory with a new program.
+    \item \textit{wait} --- Lets parent wait for child termination. Provides child state information to parent.
+    \item \textit{exit} --- Terminates process and returns state information to parent.
+    \item \textit{abort} --- Called by parent to terminate a child process.
+\end{itemize}
+
+The OS may or may not allow child processes to exist without a parent.
+If it does not, it will use \textit{cascaded termination} to terminate all child processes
+when their parent is terminated.
+
+If a child terminates and the parent has already terminated without calling wait, the child
+is a \textit{Zombie process}.
+
+If the parent of a child terminates without calling wait, the children of that process
+are \textit{Orphan processes}.

@@ -1,0 +1,10 @@
+\subsection{Scheduling}
+
+A Scheduler aims to maximise CPU usage time.
+
+It maintains two main queues of processes.
+
+\begin{itemize}
+    \item Ready queue --- Queue of processes ready for execution, and waiting for a processor.
+    \item Wait queues --- Queues of processes waiting for events. There may be multiple queues, one for each event.\ i.e.\ a queue for processes waiting for child termination, a queue for processes waiting for I/O completion, etc\ldots
+\end{itemize}

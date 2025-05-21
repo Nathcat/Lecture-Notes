@@ -1,0 +1,69 @@
+\subsection{Inter-Process Communication --- IPC}
+
+There are two widely accepted models of IPC.\@
+\begin{itemize}
+    \item Shared memory
+    \item Message passing
+\end{itemize}
+
+
+\subsubsection{Shared Memory}
+
+Communications are under the control of the processes involved.
+A major issue with this model is synchronisation between the processes.
+
+
+\subsubsection{Message Passing}
+
+The OS provides methods to send and receive messages between processes.
+
+This model involves no shared resources, but some form of communication link
+must be established between processes.
+
+
+\subsubsection{Message Passing --- Direct Communication}
+
+\begin{itemize}
+    \item $send(P, m)$ --- $m$ is sent to process $P$.
+    \item $receive(Q, m)$ --- $m$ is received from processes $Q$.
+\end{itemize}
+
+Communication link is established between one pair of processes
+automatically. Between each pair of processes there exists exactly
+one link. This link can be both uni-directional or bi-directional.
+
+
+\subsubsection{Message Passing --- Indirect Communication}
+
+Messages are directed and received through mailboxes. Each mailbox has
+a unique ID.\ Processes can only communicate if they share a mailbox.
+
+The mailboxes here form the communication link, and can be shared between
+multiple processes. Each pair of processes may share several communication
+links. This link may be either uni-directional or bi-directional.
+
+The OS provides operations to:
+\begin{itemize}
+    \item Create mailboxes (ports).
+    \item $send(A, m)$ --- Send $m$ to mailbox $A$.
+    \item $receive(A, m)$ --- Receive $m$ from mailbox $A$.
+    \item Delete mailboxes.
+\end{itemize}
+
+The main issue with a shared link such as this is determining which
+process receives a messsage. There are three main solutions to this:
+\begin{itemize}
+    \item Allowing a link to be associated with only two processes.
+    \item Allow one process at a time to receive.
+    \item Arbitrarily select receiver, sender is then notified of who received their message.
+\end{itemize}
+
+
+\subsubsection{Message Passing --- Buffering}
+
+A queue of messages is maintained on each link.
+\begin{itemize}
+    \item Zero capacity --- No queueing, sender must wait for the receiver.
+    \item Bounded capacity --- Finite queue length, when full, the sender must wait for the receiver.
+    \item Unbounded capacity --- Infinite queue length, the sender never needs to wait.
+\end{itemize}
