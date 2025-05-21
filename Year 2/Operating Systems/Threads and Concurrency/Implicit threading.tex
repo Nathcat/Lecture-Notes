@@ -1,0 +1,23 @@
+\subsection{Implicit threading}
+
+This strategy allows the creation and management of threads
+to be done by compilers and run-time libraries rather than the programmers.
+This reduces the complexity of the programs written by the programmer.
+Which is very helpful as program complexity and the number of threads per program
+increases.
+
+
+\subsubsection{Thread pools}
+
+Several threads are created and await work.
+
+\begin{itemize}
+    \item Does not require new threads to be created upon every service request (recycling threads reduces overhead).
+    \item \# of threads in application is fixed to the size of the pool.
+    \item The task to perform and the mechanics of creating the task can be separated, allowing for different strategies of running the task.
+\end{itemize}
+
+
+\subsubsection{Fork-Join}
+
+Multiple threads are forked from a single point, complete different tasks, and then rejoin to the main thread of execution.

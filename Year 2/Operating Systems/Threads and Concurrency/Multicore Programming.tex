@@ -1,0 +1,30 @@
+\subsection{Multicore Programming}
+
+\textit{Parrallelism} --- Implies a system which can perform multiple tasks simultaneously.
+
+\textit{Concurrency} --- Supports more than one task making progress. A scheduler may provide concurrency on single core systems.
+
+Note that there is a distinction between \textit{User threads} --- Threads created and managed with a
+user level library, and \textit{Kernel threads} --- Threads created and run as part of the Kernel.
+\subsubsection{Amdahl's Law}
+
+Describes the performance gains from adding additional processing cores
+to an application with both serial and parrallel components.
+
+\begin{equation}
+    \begin{split}
+        &S = \textrm{Serial portion},S\in[0, 1] \\
+        &N=\textrm{\# of cores} \\
+        \\
+        &speedup\leq\frac{1}{S+\frac{1-S}{N}}
+    \end{split}
+\end{equation}
+
+This leads us to
+
+\begin{equation}
+    \lim_{N\to\infty}speedup = \frac{1}{S}
+\end{equation}
+
+Hence, the serial portion of the application has a disproportional effect
+on the performance gain from adding additional cores.

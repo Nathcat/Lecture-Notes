@@ -1,0 +1,29 @@
+\subsection{Multithreading Models}
+
+\subsubsection{Many-to-one}
+
+Many user threads $\to$ Single kernel thread.
+
+\begin{itemize}
+    \item One thread blocking causes all others to be blocked.
+    \item Mutiple threads may not run in parallel on multicore systems as only one in the kernel.
+\end{itemize}
+
+
+\subsubsection{One-to-one}
+
+One user thread $\to$ One kernel thread
+
+Kernel threads are created with user threads.
+
+\begin{itemize}
+    \item More concurrency than Many-to-one.
+    \item \# of threads per process sometimes limited due to overhead.
+\end{itemize}
+
+
+\subsubsection{Many-to-many}
+
+Many user threads $\to$ Many kernel threads.
+
+Allows the OS to create enough kernel threads.

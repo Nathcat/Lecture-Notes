@@ -1,0 +1,55 @@
+\subsection{Threading Issues}
+
+\subsubsection{Semantics of $fork$ and $exec$}
+
+Should $fork$ duplicate all threads in the process,
+or only the thread which called it? According to man, it duplicates the
+process, with only one thread, that thread being the one that called it.
+
+$exec$ replaces the entire running process, which includes all threads.
+
+
+\subsubsection{Signal Handling}
+
+Signals notify processes of events. A signal handler is used to process
+incoming signals. This handler can either be the supplied default handler,
+or a user-defined handler, which overrides the default handler.
+
+Where should a signal be delivered in a multi-threaded program?
+
+\begin{itemize}
+    \item To the thread to which it applies.
+    \item To every thread in the process.
+    \item To certain threads.
+    \item To a single thread which is assigned specifically to receive all signals.
+\end{itemize}
+
+
+\subsubsection{Thread Cancellation}
+
+Thread cancellation allows a thread to be cancelled before it is finished.
+This is generally done in one of two ways:
+\begin{itemize}
+    \item \textit{Asynchronous} --- Immediately terminates target thread.
+    \item \textit{Deferred} --- Target thread periodically checks if it should be cancelled.
+\end{itemize}
+
+Invoking a cancellation \textit{requests} that a thread be cancelled. This request will
+remain pending if the thread is not in a state in which it can be cancelled, e.g.\ the thread
+may have disabled cancellations for a period, the request will remanin pending until it re-enables
+cancellation.
+
+The usual choice is Deferred. In POSIX \textit{pthreads}, cancellation will only occur
+at a cancellation point, i.e.\ when $pthread_testcancel()$ is called. When a thread is cancelled
+a cleanup handler is then invoked.
+
+
+\subsubsection{Creating threads in Linux}
+
+Threads are created in Linux using $clone$, with one of the four flags:
+\begin{itemize}
+    \item \textit{CLONE\_FS} --- Shares file-system information with the new thread.
+    \item \textit{CLONE\_VM} --- The same memory space is shared.
+    \item \textit{CLONE\_SIGHAND} --- Shares signal handlers with the new thread.
+    \item \textit{CLONE\_FILES} --- The set of open files is shared with the new thread.
+\end{itemize}
