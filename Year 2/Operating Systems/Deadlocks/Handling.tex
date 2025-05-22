@@ -1,0 +1,82 @@
+\subsection{Handling Deadlocks}
+
+One might:
+\begin{itemize}
+    \item Ensure the system never enters a deadlock state in the first place, either through prevention or avoidance.
+    \item Allow the system to enter a deadlock state, and then recover.
+    \item Ignore the problem and pretend deadlocks never occur.
+\end{itemize}
+
+
+\subsubsection{Prevention}
+
+Must invalidate one of the four necessary conditions for a deadlock.
+\begin{itemize}
+    \item Mutual exclusion --- Not required for sharable resources like read-only files, but must hold for non-shareable resources.
+    \item Hold and wait --- Must guarantee that a process can \textit{only hold on resource at a time}. This might be done by requiring a process to request and be allocated resources before it starts, or only allow it to request resources when there are none allocated to it. This potentially leads to low resource utilisation and starvation.
+    \item No preemption --- If a process is holding some resources requests another that cannot be immediately allocated, all resources it currently holds are released. These preempted resources are then added to list of resources for which the process is waiting, and the process is then only restarted when it can regain all the resouces in this list.
+    \item Circular wait --- Impose a total ordering of all resource types, and require that each process requests resources in an increasing order of enumeration.
+\end{itemize}
+
+It is most common to invalidate the Circular Wait condition. It simply requires that each resource is enumerated, and they then must be acquired in order.
+
+
+\subsubsection{Avoidance}
+
+The system must have \textit{a priori} information available. Such as the maximum nuymber of resources a process may need.
+
+The algorithm then dynamically examines the state of resource allocation to ensure that a circular wait condition may never occur.
+The state of resource allocation is defined as the number of available and allocated resources, and the maximum demands of each running process.
+
+When a process requests a resource, the system must decide if immediately allocating this resource leaves it in a safe state,
+i.e.\ there exists a sequence of all the processes in the system such that for each $P_i$, the resources
+that $P_i$ can still request is satisfied by the currently available resources $+$ the resources held by all the $P_j$ with $j<i$.
+
+If $P_i$'s needs are not immediately available, it will wait until all $P_j$ are finished. When $P_j$ is finished,
+$P_i$ obtains it's needed resources, completes and releases the allocated resources, and terminates.
+When $P_i$ terminates, $P_{i+1}$ can then obtain its needed resources, and so on.
+
+If the system is in a safe state, there is no deadlocks, an unsafe state suggests implies there is the possibility of a deadlock. Avoidance
+ensures that the system will never enter an unsafe state. If each resource has a single instance, this may be done using a resource allocation graph.O
+Otherwise, one may use Banker's algorithm.
+
+\subsubsection{Avoidance --- Allocation graph}
+
+A claim edge indicates that a process may request a resource (dashed line). A claim edge is converted to a request edge when a request is made, and a request edge is converted to an
+assignment edge when a resource is allocated to a process. Upon release, the assignment edge becomes a claim edge again. Resources must then be claimed \textit{a priori}.
+A request for a resource can only be granted if it does not form a cycle.
+
+
+\subsubsection{Detection}
+
+This scheme allows the system to enter a deadlock state, it is then capable of detecting and recovering from such a state.
+
+When one has only single instance resources, one may implement this by maintaining a \textit{wait-for} graph, where each node is a process, with $P_i\to P_j$ if $P_i$ is waiting
+for $P_j$.
+
+Periodically, the system will invoke an algorithm which searches for cycles in this graph. If one exists, the system is in a deadlock. Algorithms to detect cycles in graphs run in $O(n^2)$.
+
+
+\subsubsection{Recovering from deadlock --- Process Termination}
+
+\begin{itemize}
+    \item Abort all deadlocked processes
+    \item Abort one process at a time until deadlock is resolved
+\end{itemize}
+
+In which order should we abort?
+
+\begin{enumerate}
+    \item Priority
+    \item How long the process has computed, and how much longer until completion
+    \item Resources the process has used
+    \item Resources the process needs to complete
+    \item How many processes will need to be terminated
+    \item Is the process interactive or batch?
+\end{enumerate}
+
+
+\subsubsection{Recovering from deadlock --- Resource preemption}
+
+Select a victim to minimise cost, this victim is rolled back to some safe state. This may lead to starvation, as the same process may always be picked as victim,
+perhaps we include the number of times the process has been rolled back in the cost factor.

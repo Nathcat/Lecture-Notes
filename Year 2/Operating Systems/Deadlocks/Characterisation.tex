@@ -1,0 +1,20 @@
+\subsection{Characterising Deadlocks}
+
+A deadlock can occur with the following cases:
+
+\begin{itemize}
+    \item Mutual exclusion --- only one process at a time can use a resource.
+    \item Hold and wait --- A process holding a resource waits to acquire additional resources held by another process.
+    \item No preemption --- A resource can only be released voluntarily by the process holding it.
+    \item Circular wait --- There exists a set of $N$ processes such that for any $n<N$, $P_n$ is waiting for a process held by $P_{n+1}$, and $P_N$ is waiting for a resource held by $P_0$.
+\end{itemize}
+
+
+\subsubsection{Resource Allocation Graphs}
+
+The set of vertices in this graph contains both the set $R$ and $P$.
+
+A \textit{Request edge} forms $P_i\to R_j$, and an \textit{Assignment edge} forms $R_j\to P_i$.
+
+A deadlock can be observed in such a graph through cycles. If a cycle is in the graph, and all resources involved have only one instance,
+then a deadlock occurs, if each resource has several instances, then there is a \textit{possibility} of a deadlock.
