@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install texlive-full
+sudo apt install texlive-full -y
 
 #
 #   Computer Networks
