@@ -1,0 +1,72 @@
+\subsection{Scheduling Algorithms}
+
+
+\subsubsection{First-Come-First-Serve --- FCFS}
+
+Processes are executed to completion as they arrive in the ready queue.
+Suffers from the \textit{Convoy effect}, which is where short processes are
+caught behind long processes.
+
+
+\subsubsection{Shortest-Job-First --- SJF}
+
+Process with the next smallest CPU burst enters running state, or FCFS to
+resolve ties. This gives an optimal average waiting time for a set of processes.
+
+The \textit{Shortest-Remaining-Time --- SRT} version of this algorithm is preemptive.
+
+Length of next CPU burst $\tau_{n+1}$ is estimated using previous burst lengths with
+Exponential Averaging.
+
+\begin{equation}
+    \begin{split}
+        &t_n=\textrm{Actual length of burst }n \\
+        &\alpha\in[0,1] \\
+        &\tau_{n+1}=\alpha t_n+(1-\alpha)\tau_n
+    \end{split}
+\end{equation}
+
+
+\subsubsection{Round Robin --- RR}
+
+Processes are preempted after a set time quantum $q$ elapses.
+The timer interrupts the running process after $q$.
+
+\begin{itemize}
+    \item Large $q$ --- Exhibits FIFO behaviour.
+    \item Small $q$ --- $q$ must be large with respect to the context switch overhead.
+\end{itemize}
+
+Generally gives higher average turnaround than SJF, but better response time.
+
+
+\subsubsection{Priority Scheduling}
+
+Processes have a priority \#. The highest priority is the smallest \#. The CPU is allocated
+to the process with the highest priority.
+
+SJF is priority, where $p\propto\frac{1}{\tau_{n+1}}$.
+
+Starvation may occur where low priority processes will never execute. A solution to this
+is Ageing, i.e.\ as time progresses, increase priority.
+
+
+\subsubsection{Priority RR}
+
+Process with the highest priority runs, where $p_1=p_2$, use RR.
+
+
+\subsubsection{Multilevel Queue}
+
+Use separate queues for each priority. Processes are then chosen from the highest
+priority queue.
+
+In a \textit{Multilevel Feedback Queue}, each queue may use a different scheduling algorithm to
+order processes within it, and processes may be moved between queues. The implemenation must provide
+methods to:
+\begin{itemize}
+    \item Promote and demote processes between queues.
+    \item Determine the queue for a new process.
+\end{itemize}
+
+Ageing can be implemented by promoting processes through queues.

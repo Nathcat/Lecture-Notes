@@ -1,0 +1,57 @@
+\subsection{Multiple Processor Scheduling}
+
+
+\subsubsection{Symmetric Multiprocessing}
+
+\begin{itemize}
+    \item Processor is self-scheduling.
+    \item All threads may be in common ready queues.
+    \item Or, each processor may have its' own private queue of threads.
+\end{itemize}
+
+
+\subsubsection{Logical processors}
+
+Each core may have multiple hardware threads, each forming a logical
+processor, which from the OS' point of view is a separate processor.
+
+The CPU may then switch between hardware threads when one thread is busy
+waiting for memory, or some other event.
+
+
+\subsubsection{Multithreaded Multicore Systems}
+
+Intel Hyperthreading refers to a system in which each processor core has
+multiple hardware threads.
+
+This leads to two scheduler levels:
+\begin{itemize}
+    \item OS decides software thread which runs on each hardware thread.
+    \item Each core decides which hardware thread runs on each physical processor core.
+\end{itemize}
+
+
+\subsubsection{Load balancing}
+
+In \textit{Symmetric Multiprocessing}, all CPUs must be loaded for efficiency. Load
+balancing keeps the workload between CPUs even.
+
+\begin{itemize}
+    \item Push migration --- Periodically checks load on CPUs and pushes tasks from overloaded CPUs to others.
+    \item Pull migration --- Idle processors can pull waiting tasks from busy processors.
+\end{itemize}
+
+\subsubsection{Processor Affinity}
+
+The data most recently accessed by a thread on a processor is stored in the processor's cache.
+This is called \textit{Processor Affinity}, and may be affected by Load Balancing.
+
+\begin{itemize}
+    \item \textit{Soft Affinity} --- OS attempts to keep a thread on the same processor, but this cannot be guaranteed.
+    \item \textit{Hard Affinity} --- Allows a process to specify a set of processes it may run on.
+\end{itemize}
+
+
+\subsubsection{NUMA Aware OS}
+
+If an OS is \textit{NUMA Aware}, it will assign memory close to the CPU on which the process is running on.

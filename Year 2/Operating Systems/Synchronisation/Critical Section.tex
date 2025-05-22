@@ -1,0 +1,64 @@
+\subsection{Critical Section}
+
+The \textit{Critical Section --- CS} of a program is a section of code in which
+a program is manipulating some shared memory between proceses. The problem with
+this process lies in synchronising these two processes to ensure the data they
+use is valid and consistent.
+
+In order to ensure this, the CS of a process must be mutually exclusive, i.e.\ 
+when one program is in its' CS, no other program can be in its' CS.
+
+
+\subsubsection{Solution Requirements}
+
+\begin{itemize}
+    \item Mutually exclusive
+    \item Progress --- If no process is in its' CS, the selection of the next process to enter its' CS cannot wait indefinitely.
+    \item Bounded Waiting --- Some bound exists on the \# of programs which can enter their CS after another program has requested to enter its' CS, before this request is granted.
+\end{itemize}
+
+
+\subsubsection{Interrupt Solution}
+
+On the entry section (before the CS), disable interrupts, and on the exit section (leaving the CS), enable interrupts.
+
+This ensures that the process will complete its' CS, but in the case that the CS is very long, other programs must
+wait a long time to enter their own CS (\textit{Starvation}). Hence this approach can be innefficient in multiprocessor
+systems.
+
+\subsubsection{Peterson's Solution}
+
+This solution works to synchronise two processes. It assumes that the $load$ and $store$ instructions are atomic and cannot
+be interrupted.
+
+The two processes in question share two variables:
+\begin{itemize}
+    \item int turn --- Defines which process' turn it is to enter their CS.
+    \item boolean flag[2] --- Indicates if each process is ready to enter their CS.
+\end{itemize}
+
+\begin{equation}
+    \begin{split}
+        &\quad\quad Proc\quad P_i \\
+        &flag_i\to 1 \\
+        &turn\to j \\
+        &while\quad(flag_j=1); \\
+        &\{CS\} \\
+        &flag_i\to 0 \\
+        &\{remainder\}
+    \end{split}
+\end{equation}
+
+The processes may either interfere with each other, or not interfere:
+\begin{itemize}
+    \item Non-interfering --- If $P_i$ never goes to entry, $P_j$ will simply run to completion.
+    \item Interfering --- If both $P_i$ and $P_j$ go to entry, the last to set $turn$ will stall at entry until the other is complete.
+\end{itemize}
+
+This solution may not work in modern systems, since they can reorder instructions which are not
+dependent on each other to improve efficiency. This may result in an unexpected order of instructions,
+and therefore unexpected behaviour with this approach.
+
+A fix to this is to use a \textit{Memory Barrier}, when used, the system will then ensure that all $load$
+and $store$ instructions are completed before proceeding, effectively ensuring the order or instructions will be
+followed as intended.

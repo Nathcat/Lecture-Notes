@@ -1,0 +1,39 @@
+\subsubsection{Basic Concepts}
+
+Main concern of a scheduler is the distribution of CPU bursts.\
+\begin{itemize}
+    \item Large \# of short CPU bursts
+    \item Small \# of large CPU bursts
+\end{itemize}
+
+
+Scheduler decisions may occur when a process:
+\begin{enumerate}
+    \item Switches from running to waiting
+    \item Switches from running to ready
+    \item Switches from waiting to ready
+    \item Terminates
+\end{enumerate}
+
+When decisions are made at 1.\ or 4., the scheduler is
+non-preemptive, otherwise it is preemptive.
+
+A non-preemptive scheduler allows a process to keep control of the CPU
+until it releases, either by terminating or switching to the waiting state.
+A preemptive scheduler can switch a process out of the running state without termination.
+
+A \textit{Race condition} is where the output of a program is dependent on the timing
+or sequence of execution. Preemptive scheduling can lead to race conditions, where there is shared 
+data between process / threads. One process may change data when the 2nd is preempted into the running state.
+The 2nd process then reads from inconsistent data.
+
+The \textit{Dispatcher} controls when process are switched into the CPU.
+It controls:
+\begin{itemize}
+    \item Context switching
+    \item Switching to user mode
+    \item Restarting a user program from the correct point
+\end{itemize}
+
+\textit{Dispatch latency} is the time it takes the dispatcher to stop one
+process and start another.

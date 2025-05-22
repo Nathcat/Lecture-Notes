@@ -1,0 +1,7 @@
+\subsection{Mutex locks}
+
+Mutex locks are a simpler way of implementing synchronisation. They are simply
+a boolean value indicating if something can be locked.
+
+The CS of a process then is protected with the $acquire$ and $release$ operations. This approach
+however does require busy waiting, and therefore the lock is referred to as a \textit{Spinlock}.

@@ -1,0 +1,28 @@
+\subsection{Semaphores}
+
+A Semaphore $S$ is an integer variable which is accessed through atomic operations.
+
+This approach provides the two operations $wait$ and $signal$.
+
+\begin{itemize}
+    \item $wait$ --- Waits until $S>0$, and then decrements $S$, effectively indicating the lock.
+    \item $signal$ --- Increments $S$, indicating that it is released, and can be locked.
+\end{itemize}
+
+Two main types of Semaphore:
+\begin{itemize}
+    \item Counting --- Value of $S$ is unrestricted.
+    \item Binary --- $S\in[0,1]$, $S\in\mathbb{N}$, effectively the same as a mutex lock.
+\end{itemize}
+
+An implementation must guarantee that no two processes can $wait$ and $signal$ a Semaphore at the same time.
+The implementation them becomes solving the CS problem. The naive solution leads to busy waiting within the CS,
+which is not a good solution.
+
+An implementation with no busy waiting might use queues for each Semaphore. Each entry to the queues contains a value for the Semaphore,
+and a pointer to the next record in the list. This requires a further two operations to be used inside $wait$ and $signal$:
+
+\begin{itemize}
+    \item $block$ --- $wait$ calls $block$, the invoking process is placed on the appropriate queue.
+    \item $wakeup$ --- $signal$ calls $wakeup$, Remove a process from the waiting queue and place it back onto the ready queue.
+\end{itemize}

@@ -1,0 +1,19 @@
+\subsection{Synchronisation at Hardware level}
+
+Synchronisation is implemented at the hardware level using two concepts:
+\begin{itemize}
+    \item Hardware instructions which ensure synchronisation.
+    \item Atomic variables
+\end{itemize}
+
+\subsubsection{Hardware instructions}
+
+\begin{itemize}
+    \item Test and set --- Tests and modifies a word atomically, and uninterruptedly.
+    \item Compare and swap --- Swap two words atomically and uninterrupedly.
+\end{itemize}
+
+\subsubsection{Atomic variables}
+
+These provide uninterruptable and atomic updates on basic data types, and are implemented using the
+aforementioned hardware instructions.
