@@ -1,18 +1,27 @@
 #!/bin/bash
 
-sudo apt install texlive-full -y
+sudo apt install latex2html -y
+
+mkdir html
 
 #
-#   Computer Networks
+#   Year 2
 #
+
+mkdir "html/Year 2"
+
+#
+#   G5115 - Computer Networks
+#
+
 cd "Year 2/Computer Networks"
-pdflatex "Computer Networks.tex"
-mv "Computer Networks.pdf" "../../G5115 - Computer Networks.pdf"
+latex2html "Computer Networks.tex" -dir "../../html/Year 2/G5115-Computer-Networks" -mkdir
+cd ../..
 
 #
-#    Operating Systems
+#   G6059 - Operating Systems
 #
-cd "../Operating Systems"
-pdflatex "Operating Systems.tex"
-mv "Operating Systems.pdf" "../../G6059 - Operating Systems.pdf"
 
+cd "Year 2/Operating Systems"
+latex2html "Operating Systems.tex" -dir "../../html/Year 2/G6059-Operating-Systems" -mkdir
+cd ../..
