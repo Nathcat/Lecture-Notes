@@ -25,3 +25,17 @@ cd ../..
 cd "Year 2/Operating Systems"
 latex2html "Operating Systems.tex" -dir "../../html/Year 2/G6059-Operating-Systems" -mkdir
 cd ../..
+
+#
+#   Year 3
+#
+
+mkdir "html/Year 3"
+
+#
+#   G5026 - Human Computer Interaction
+#
+
+cd "Year 3/Human Computer Interaction"
+latex2html "Human Computer Interaction.tex" -dir "../../html/Year 3/G5026-Human-Computer-Interaction" -mkdir
+cd ../..
