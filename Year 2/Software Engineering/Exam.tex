@@ -1,0 +1,377 @@
+\documentclass[a4paper]{report}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage[T1]{fontenc}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\definecolor{delim}{RGB}{20,105,176}
+\definecolor{numb}{RGB}{106, 109, 32}
+\definecolor{string}{rgb}{0.64,0.08,0.08}
+
+\lstdefinelanguage{json}{
+    numbers=left,
+    numberstyle=\small,
+    frame=single,
+    rulecolor=\color{black},
+    showspaces=false,
+    showtabs=false,
+    breaklines=true,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{gray}\hookrightarrow\space}},
+    breakatwhitespace=true,
+    basicstyle=\ttfamily\small,
+    upquote=true,
+    morestring=[b]",
+    stringstyle=\color{string},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+\title{G6046 --- Software Engineering --- Exam}
+\author{Candidate \#279103}
+\date{Academic year 2024/25}
+
+\begin{document}
+\maketitle
+
+\section{Question 1}
+
+
+\subsection{Part A}
+
+Mandatory functional requirements:
+\begin{itemize}
+    \item System for users to create and authenticate accounts
+    \item Conference system (ability to host / join conferences)
+\end{itemize}
+
+Desirable functional requirements:
+\begin{itemize}
+    \item Ability to store conference recordings
+    \item Cloud storage system
+\end{itemize}
+
+
+\subsection{Part B}
+Mandatory non-functional requirements:
+\begin{itemize}
+    \item Audio $+$ video suppoort in conferences
+    \item Users under 18 not to appear in search results.
+\end{itemize}
+
+Desirable non-functional requirements:
+\begin{itemize}
+    \item Uploadable picture to be between 400$\times$400 and 1000$\times$1000 pixels.
+    \item Mean time between failures of close to 500 hours
+\end{itemize}
+
+
+\subsection{Part C}
+Code Red have stated that \textit{TaskWorld} will allow users under the
+age of 18 to use thei platform, albeit with certain restrictions. As such a domain
+requirement might be that the application has safety features to support such a user base.
+
+In order to implement this they would need to ensure that TaskWorld strictly confirms to
+data protection and safety laws, and laws specific to child safety. They would need to implement
+robust features that allow their users to have direct control over the data Code Red are holding
+about them, and the kind of content they might be exposed to on the platform. They might, for example,
+add a \textit{blocking} feature to allows users to block other users, or a \textit{reporting} feature
+to allow users to report the actions of other users for review by some moderation system.
+
+These measures would help improve the safety of the platform for the stated user base, and help protect
+Code Red from potential legal action in the future.
+
+
+\subsection{Part D}
+Firstly, the young team may indicate a lack of experience in big projects like this. This might hinder
+progress as they learn new technologies and how to work together, and potentially
+decrease the overall quality of the final product. This is a \textit{Lack of Skilled Personnel}
+
+The team does however, have Chris, a veteran with lots of experience in projects like this. Notably though,
+\textit{Chris only accepted the job as a favour to a member of the board he is good friends with}, this might
+indicate a lack of investment or interest in the project from Chris. Perhaps he will not give his full effort
+into assisting the team, or leave the team completely, because it is not a project he finds interesting.
+This effectively leaves the young and potentially inexperienced team to their own devices, which as previously 
+discussed, might hinder progress. This is an issue of \textit{Employee Turnover}
+
+
+\subsection{Part E}
+As stated, the TaskWorld team are very keen to shape the development process, and with large projects like this
+it is essential to get client feedback to ensure that each part of the application fits the expectations.
+As such, Agile is a good fit for this project.
+
+The Agile methodology expects that each part of the application is developed in so-called \textit{Sprints}, and
+then presented to the client for feedback, and continually improved until the client accepts it. Each Sprint adding new
+features until the client is happy with the final product. The notable part here is that the client is heavily involved,
+after every sprint they are consulted to gain feedback on the current system, which is then improved using their feedback.
+
+Hence, using the Agile methodology would be a good fit here, as it would allow the TaskWorld team (the client) to provide 
+their feedback at each stage of development, helping to shape the development process. Furthermore, since they are keen to
+be involved, we can assume their feedback will be meaningful and helpful, which further helps to enhance the final product.
+
+Agile also tends to produce good documentation, as each part of the application can be documented as it is created. This helps
+lead to a good quality, maintainable codebase. If the development team expands in the future as the application grows, this kind
+of maintainability and good documentation will be invaluable to improve and build off the older systems built into the codebase
+by the original team.
+
+
+\section{Question 3}
+
+
+\subsection{Part A}
+
+\begin{lstlisting}
+    public class Product
+\end{lstlisting}
+
+\subsubsection{Fields}
+\begin{itemize}
+    \item Name --- String --- The name of the product
+    \item Price --- Float --- The price of the product (potentially also Integer)
+    \item Supplier --- Integer --- The Numeric code for the supplier of this product
+    \item ProductCode --- Integer --- The Suppler Product Code for this product.
+\end{itemize}
+
+
+\begin{lstlisting}
+    public class BulbPacket extends Product
+\end{lstlisting}
+
+\subsubsection{Fields}
+\begin{itemize}
+    \item NoInPacket --- Integer --- The number of bulbs in the packet.
+    \item MonthsToDevelop --- Integer --- The number of months these bulbs take to develop.
+\end{itemize}
+
+
+\begin{lstlisting}
+    public class LivePlant extends Product
+\end{lstlisting}
+
+\subsubsection{Fields}
+\begin{itemize}
+    \item LatinName --- String --- The Latin name of this plant.
+    \item IsIndoor --- Boolean --- Whether or not this is an indoor plant. If false it is an outdoor plant.
+\end{itemize}
+
+
+\begin{lstlisting}
+    public class Statue extends Product
+\end{lstlisting}
+
+\subsubsection{Fields}
+\begin{itemize}
+    \item Height --- Integer --- The height of this Statue in $cm$.
+    \item Material --- String --- The Material this Statue is made of (potentially an enum of potential materials as well)
+    \item Fragile --- Boolean --- Whether or not this Statue is fragile.
+\end{itemize}
+
+
+\begin{lstlisting}
+    public class Customer
+\end{lstlisting}
+
+Note that to facilitate fast lookups by a customer's last name, there will need to be some other system
+implemented which can do this. You might link the hash of a customer's last name to the instance describing that
+customer's information, for example.
+
+\subsubsection{Fields}
+\begin{itemize}
+    \item FirstName --- String --- The Customer's first name.
+    \item LastName --- String --- The Customer's last name. Separated to facilitate faster lookups by last name.
+    \item Address --- String --- The Customer's address.
+    \item Telephone --- String --- The Customer's Telephone number.
+    \item EmailAddress --- String --- The Customer's Email address.
+    \item Orders --- Array of Order --- A list of orders placed by this customer.
+\end{itemize}
+
+\subsubsection{Methods}
+\begin{lstlisting}
+    public void placeOrder(Item[])
+\end{lstlisting}
+
+Place an order for the given list of items.
+
+
+\begin{lstlisting}
+    public class Order
+\end{lstlisting}
+
+\subsubsection{Fields}
+\begin{itemize}
+    \item Number --- Integer --- The unique order number
+    \item Products --- Product[] --- The products in this order
+    \item Status --- String --- The current status of this order
+\end{itemize}
+
+
+\subsection{Part B}
+\begin{lstlisting}
+    public class ProductReviewTest {
+        @Test
+        public void test1() {
+            String author = "John Smith";
+            String text = "Great product";
+            int rating = 5;
+            ProductReview pr = new ProductReview(author, text, rating);
+
+            assertEquals(author, pr.getAuthor());
+            assertEquals(text, pr.getReviewText());
+            assertEquals(0, pr.getVotes());
+
+            pr.upVote();
+            assertEquals(1, pr.getVotes());
+
+            pr.downVote(); pr.downVote();
+            assertEquals(0, pr.getVotes());
+
+            pr.markAsSpam();
+            assertEquals("Marked as Spam!", pr.getReviewText());
+            
+            pr.markAsNotSpam();
+            for (int i = 0; i < 150; i++) pr.upVote();
+            assertEquals(100, pr.getVotes());
+
+            for (int i = 0; i < 150; i++) pr.downVote();
+            assertEquals(0, pr.getVotes());
+
+            pr = new ProductReview(author, "Fab Book", 10);
+            assertEquals(0, pr.getRating());
+        }
+    }
+\end{lstlisting}
+
+
+\subsection{Part C}
+
+\subsubsection{XML}
+\lstset{language=XML,morekeywords={
+    event, 
+    date, 
+    weekday,
+    day,
+    month,
+    year, 
+    meeting,
+    name,
+    time,
+    is24HoursTime,
+    hours,
+    minutes,
+    duration,
+    location,
+    isOnline,
+    participants, 
+    participant
+    }}
+
+\begin{lstlisting}
+    <event>
+        <date>
+            <weekday>Friday</weekday>
+            <day>1</day>
+            <month>12</month>
+            <year>2023</year>
+        </date>
+
+        <meeting>
+            <name>Management meeting</name>
+            <time>
+                <is24HoursTime>true</is24HoursTime>
+                <hours>14</hours>
+                <minutes>30</minutes>
+            </time>
+            <duration>60</duration>
+        </meeting>
+
+        <location>
+            <isOnline>false</isOnline>
+            <name>room MB101</name>
+        </location>
+
+        <participants>
+            <participant>David Thewlis</participant>
+            <participant>Amy Pond</participant>
+            <participant>Arthur Lowe</participant>
+        </participants>
+    </event>
+\end{lstlisting}
+
+\subsubsection{JSON}
+\lstset{language=json}
+
+\begin{lstlisting}
+    {
+        "date": {
+            "weekday": "Friday",
+            "day": 1,
+            "month": 12,
+            "year": 2023
+        },
+
+        "meeting": {
+            "name": "Management meeting",
+            "time": {
+                "is24HoursTime": true,
+                "hours": 14,
+                "minutes": 30
+            },
+            "duration": 60
+        },
+
+        "location": {
+            "isOnline": false,
+            "name": "room MB101"
+        },
+
+        "participants": [
+            {
+                "name": "David Thewlis"
+            },
+            {
+                "name": "Amy Pond",
+            },
+            {
+                "name": "Arthur Lowe"
+            }
+        ]
+    }
+\end{lstlisting}
+\end{document}
