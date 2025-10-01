@@ -39,3 +39,11 @@ mkdir "html/Year 3"
 cd "Year 3/Human Computer Interaction"
 latex2html "Human-Computer-Interaction.tex" -dir "../../html/Year 3/G5026-Human-Computer-Interaction" -mkdir
 cd ../..
+
+#
+#   G6077 - Intro to Computer Security
+#
+
+cd "Year 3/Intro to Computer Security"
+latex2html "Intro-to-Computer-Security.tex" -dir "../../html/Year 3/G6077-Intro-to-Computer-Security" -mkdir
+cd ../..
