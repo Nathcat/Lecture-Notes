@@ -15,7 +15,7 @@ mkdir "html/Year 2"
 #
 
 cd "Year 2/Computer Networks"
-latex2html "Computer Networks.tex" -dir "../../html/Year 2/G5115-Computer-Networks" -mkdir
+latex2html "Computer-Networks.tex" -dir "../../html/Year 2/G5115-Computer-Networks" -mkdir
 cd ../..
 
 #
@@ -23,7 +23,7 @@ cd ../..
 #
 
 cd "Year 2/Operating Systems"
-latex2html "Operating Systems.tex" -dir "../../html/Year 2/G6059-Operating-Systems" -mkdir
+latex2html "Operating-Systems.tex" -dir "../../html/Year 2/G6059-Operating-Systems" -mkdir
 cd ../..
 
 #
@@ -37,5 +37,5 @@ mkdir "html/Year 3"
 #
 
 cd "Year 3/Human Computer Interaction"
-latex2html "Human Computer Interaction.tex" -dir "../../html/Year 3/G5026-Human-Computer-Interaction" -mkdir
+latex2html "Human-Computer-Interaction.tex" -dir "../../html/Year 3/G5026-Human-Computer-Interaction" -mkdir
 cd ../..
