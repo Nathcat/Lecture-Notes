@@ -1,0 +1,55 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\title{G6021 --- Comparative Programming}
+\author{Dr. Vincent Van Oostrom \and Notes by Nathan Baines}
+\date{Academic year 2025/26}
+
+\begin{document}
+\maketitle
+
+\section{What is this module about?}
+This module is concerned with conceptualising a comparison between the four different programming
+paradigms.
+
+These paradigms are explained in the following subsections. It is worth noting that a language can be
+multi-paradigm, thus being capable of expressing a program in two or more of the four paradigms. 
+Furthermore, if languages $A$ and $B$ are said to be \textit{Turing complete}, one might assume that any program expressed in $A$, can be translated to a program in $B$ which responds to inputs in the same way.
+
+
+\subsection{Imperative}
+The Imperative paradigm is based on the idea of a Turing machine, the idea is that every line implies a
+particular instruction to be carried out.
+
+
+\subsection{Object Oriented}
+This paradigm is based on the concept of objects which can modify each other. By comparison, Imperative programming might be thought of as an Object Oriented program which only operates within a singular
+object, which OOP allows for the existence of multiple objects, which can allow modify each other.
+
+
+\subsection{Functional}
+This paradigm is based on the use of functions, and function composition. A program is comprised of
+many functions which are combined together through a sequence of funciton compositions, eventually
+achieving the desired output.
+
+
+\subsection{Logic}
+The logical paradigm is arguably the least common, an example of it is in the language \textit{Prolog}.
+
+The idea is that a problem is proposed using logical propositions, and the answer determined using
+further supplied predicates. The aim of a program which follows this paradigm is to uncover the truths
+implied by the supplied predicates.
+
+
+
+\end{document}

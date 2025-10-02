@@ -47,3 +47,11 @@ cd ../..
 cd "Year 3/Intro to Computer Security"
 latex2html "Intro-to-Computer-Security.tex" -dir "../../html/Year 3/G6077-Intro-to-Computer-Security" -mkdir
 cd ../..
+
+#
+#   G6021 - Comparative Programming
+#
+
+cd "Year 3/Comparative Programming"
+latex2html "Comparative-Programming.tex" -dir "../../html/Year 3/G6021-Comparative-Programing" -mkdir
+cd ../..
