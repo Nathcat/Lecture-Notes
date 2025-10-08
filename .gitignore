@@ -5,3 +5,8 @@
 **/*.synctex.gz
 **/*.pdf
 html/Year*
+**/*.out
+**/*.bbl
+**/*.bcf
+**/*.blg
+**/*.run.xml
