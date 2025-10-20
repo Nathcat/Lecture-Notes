@@ -1,0 +1,98 @@
+\section{User Authentication}
+There are four factors which may be used when authenticating a user's identity:
+\begin{itemize}
+	\item Something the individual knows, i.e.\ some password / PIN.
+	\item Something the individual possesses, i.e.\  A token, smartcard, keycard, etc...
+	\item Something the individual is, i.e.\ Biometrics
+	\item Something the individial does, i.e.\ Voice pattern, handwriting, typing rhythm
+\end{itemize}
+
+\subsection{Assurance Levels}
+The \textit{Assurance Level} of an authentication system describes an organisation's
+degree of certainty that a user has presented a credential which refers to his or her unique
+identity. There are generally assumed to be four levels of assurance, with 1 being the lowest
+confidence, and 4 being the highest.
+
+\subsection{Potential Impact of security breaches}
+FIPS 199 defines three levels of potential impact on organisations / individuals should there
+be a breach of security. These three levels are Low, Moderate, and High.
+
+The assurance level of a system is directly tied into its potential impact, i.e.\ the
+potential impact of a breach in a system should be lower in conjunction with the assurance
+level. The lower assurance levels are more likely to break, and therefore should be linked
+to systems which have less potential impact. Systems with higher assurance levels should
+be used for more critical systems.
+
+\subsection{Password Authenticaton}
+This method of authentication requires a passphrase, which theoretically is known only
+to the user. Thus ensuring their identity.
+
+Passwords will need to be stored in the authentication system in order to verify their
+correctness, but it is important to note that they should not be stored in a plaintext
+format. The accepted method to store passwords is as a secure hash. The user would then
+send their plaintext password to the authentication server, which will hash the entry with
+the same algorithm, and compare the result to the hash it has for that user.
+
+Password addition rules can help reduce the likelihood of a dictionary attack, should an
+attacker manage to obtain hashed passwords. A salt will also help mitigate this risk by 
+introducing entropy into the stored hash.
+
+Note that when using salting, the salt used will need to be stored along with the hashed value
+in some way, otherwise you will not be able to compare the plaintext against the salted hash.
+Algorithms such as BCrypt do this for you, by including the hash as part of the outputted hash.
+
+\subsubsection{Password Cracking}
+\begin{itemize}
+	\item Dictionary attacks --- A dictionary of possible passwords is hashed and then compared against the stored hashes.
+	\item Rainbow table attacks --- Use pre-computed tables of hash values for all hashed passwords, lookup the stored hash in this table. This can be countered with a sufficiently large salt and hash length.
+\end{itemize}
+
+Password crackers such as John the Ripper use the above techniques and exploit the fact that people tend to
+choose easuly guessable passwords.
+
+A lot of these techniques, although they have improved with computational resources, can be fended off through
+a number of approaches:
+\begin{itemize}
+	\item User education
+	\item Computer generated passwords and password managers
+	\item Reactive password checking
+	\item Complex password policy
+\end{itemize}
+
+\subsection{Memory Cards}
+These are cards which store data, but do not process data. The most common is the magnetic stripe card.
+
+The intention is that they can store some internal electronic memory, which is used for physical access to something,
+such as a Hotel room or ATM. The security of this approach is improved when combined with a password or a PIN.
+
+They do however require a special reader, and suffer from potential loss of the card itself.
+
+\subsection{Smart Tokens}
+These include an embedded microprocessor, and potentially a keypad / display for human interaction.
+
+Requires some elecrtonic interface to communicate with, may be either contact or contactless. They generally
+provide authentication through one of three strategies, Static, Dynamic password generator, and Challenge-response.
+
+\subsection{Electronic Identity Cards}
+These are smart cards used as a national identity card for citizens. They can provide a stronger proof of identity and
+can be used in a wider variety of applications.
+
+\subsection{SmartPhones}
+Smartphones provide a common interface for 2FA applications.
+
+\subsection{Biometric authentication}
+This approach verifies an individual's identity based on unique physical characteristics, such as a fingerprint.
+
+\subsection{Remote user authentication}
+This is a concept which provides authentication over the internet, or a remote communications link. It is of a higher risk
+and therefore must be more complex to ensure safety of information and identity.
+
+There are additional security threats such as eavesdropping, password capturing, replaying an observed authentication sequence, etc\ldots
+
+Generally this method relies on some form of challenge-response protocol to counter threats.
+
+\subsection{Federated Identity Management}
+This is a relatively new concept involving the use of a common identity management scheme across
+multiple applications which support many users.
+
+The central idea is the use of a Single-Sign-On protocol / service.

@@ -1,0 +1,94 @@
+\section{Functional Programming}
+Functional programs consist entirely of functions, and built through function composition.
+Expressions built by functions are then evaluated through reduction steps.
+
+The focus of a functional programming language is describing \textit{what} is to be computed, rather than what is to be computed.
+
+Functional programming languages are generally strongly typed, and have built-in memory
+management. The advantage of their use is that programs are often shorter, and easier
+to understand. They can also be easier to design and maintain that imperative programs,
+but can suffer in terms of performance.
+
+\subsection{Haskell}
+Haskell is a functional programming language we will be using in this module. It features
+a syntax which allows the definition of functions using mathematical-like syntax:
+
+\begin{lstlisting}
+square x = x * x
+\end{lstlisting}
+
+The role of the computer is to evaluate and display the results of expressions that the
+programmer forms by composition of various functions, effectively like a sophisticated
+calculator.
+
+Such expressions are evaluated through a series of \textit{reduction steps}, for example,
+using the above function, the following expression:
+
+\begin{lstlisting}
+square 6
+\end{lstlisting}
+
+Would be evaluated as follows:
+
+\begin{equation}
+square 6 \to 6\times6 \to 36
+\end{equation}
+
+\ldots finding the result of $36$. The \textit{complexity} of this expression is set as
+$2$ then, since the total number of reduction steps required to evaluate this expression is $2$.
+Note that the expression \textit{normal form}, refers to the form of an expression which
+cannot be reduced any further.
+
+
+\subsection{Reduction Sequences}
+In pure functional languages the value of an expression is uniquely determined by its
+components, and is independent of the order of reduction, this is the Unicity of normal
+forms and provides the advantage of increased readability in programs. Some reduction
+sequences however, might not lead to a value, some do not terminate.
+
+The function $fortytwo(x) = 42$, and $infinity(x)=infinity(x)$ for example.
+
+Some reduction sequences of the expression $fortytwo(infinity(x))$ will lead to $42$, but
+some will not terminate, this expression has \textit{Unicity in its normal forms}, since
+all the sequences which evaluate fully lead to $42$.
+
+\subsubsection{Strategies}
+Although the normal form may be unique, the order of reductions is important. The
+\textit{Strategy of evaluation} defines the reduction sequence that a language implements.
+
+The two most popular strategies are:
+\begin{itemize}
+	\item Call-by-name (Normal order): First reduce the application using the definition of the function, and then the argument.
+	\item Call-by-value (Applicative order): First evaluate the argument, and then the application using the definition of the function.
+\end{itemize}
+
+Different strategies may result in a different number of reductions steps, and take different
+paths through the expression's reduction graph.
+
+Call-by-name \textit{always} finds a value, if there is one, where Call-by-value is generally
+more efficient, but may fail to find a value.
+
+Haskell uses a strategy called \textit{lazy} evaluation, which guarantees that if an 
+expression has a normal form, the evaluator will find it. Lazy evaluation = call-by-name + sharing.
+
+\subsection{Reduction Graphs}
+A reduction graph illustrates \textit{all the possible ways an expression might be evaluated}.
+
+The expression $square (3+4)$ for example, can be reduced multiple different ways, one might
+first substitute $(3+4)$ into $square$, and then calculate $3+4$ twice, substituting again,
+arriving at $7\times 7$. One might also calculate $3+4$, and substitute to $square(7)$, 
+then leading to $7\times 7$.
+
+\subsection{Functional Values}
+Functions are also values. A function is simply a mapping which associates to each element
+in its domain $A$, to the codomain $B$.
+
+\begin{equation}
+f:A\to B
+\end{equation}
+
+If a function of type $A\to B$ is applied to an argument $x\in A$, it will produce a result
+which is a member of $B$, i.e. $f(x)\in B$.
+
+In Haskell, the type of a function is describe as a sequence of the types involved in
+its reduction steps.
