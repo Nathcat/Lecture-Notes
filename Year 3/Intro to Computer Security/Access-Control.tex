@@ -1,0 +1,54 @@
+\section{Access Control}
+In a broad sense, all of Computer Security is simply a concern of access control,
+RFC 4949 defines computer security as `measures that implement and assure security
+services in a computer system, particularly those that assure access control service'.
+
+\subsection{Policies}
+\subsubsection{Discretionary access control (DAC)}
+Controls access based on the identity of the requestor and on access rules
+stating what requestors are (or are not) allowed to do.
+
+Under this scheme an entity may be granted access rights that permit the entity, by its own volition,
+to enable another entity to access some resource. It is usually provided using an \textit{Access control matrix}.
+
+In such a matrix, one dimension consists of identified subjects that may attempt to access
+the resources, while the other dimension lists the objects that may be accessed. Each entry in the matrix then consists of
+a particular access right setting, for a particular subject and object.
+
+\subsubsection{Mandatory access control (MAC)}
+Controls acess based on computing security labels with clearances.
+
+\subsubsection{Role-based access control (RBAC)}
+Controls access based on the roles that users have within the system and on rule stating 
+what accesses are allowed to users in given roles.
+
+\subsubsection{Attribute-based access control (ABAC)}
+Controls access based on attributes of the user, the resource to be accessed, and the 
+current environmental conditions.
+
+This approached evaluates rules against the attributes of entities, operations, and the environment
+which is relevant to a request. These attributes must be evaluated and compared against access control rules defining
+subject / object attribute combinations in a given envrionment.
+
+\subsection{UNIX File Access Control}
+On the disk of a UNIX system is an inode table, which contains inodes which can be associated
+with several file names, although once active, an inode is loaded into memory and is then associated with only one file.
+
+An Inode contains control structires with key informatin needed for a particular file.
+
+Directories are structured in a hierarchical tree, each may contain file / subdirectories, and pointers to associated inodes.
+
+Each object has 12 protection bits attached to it, the first three for a single user designated as the owner, the second set for the group,
+and the third for others. The remaining 3 bits are for other flags, which are often not used and as such most commonly set to 0.
+The owner, group ID, and protection bits are part of the file's inode.
+
+SetUID, and SetGID, these flags allow the system to temporarily use the rights of the file owner / group in addition to the real
+user's rightrs. This enables privilged programs to access files / resources which are not generally accessible.
+
+The sticky bit is applied to a directory, it specifies that only the owner of any file in the directory can rename, move, or delete that file.
+
+The superuser however is exempt from access control restrictions and has system-wide access.
+
+An Access Control List assigns a list of user IDs and groups to a file, each with their own set of protection bits.
+A file does not necessarily need to have an ACL, and an additional protection bit must be included to indicate whether the file has an
+extended ACL.
