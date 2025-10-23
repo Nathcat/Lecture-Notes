@@ -1,0 +1,84 @@
+\section{Lambda Calculus}
+Lambda calculus is a computational model based on the notion of a function,
+it was defined by Alonzo Churhc in the 1930's, as a precise notation
+for anonymous functions.
+
+Lambda Calculus is used to:
+\begin{itemize}
+    \item Study computability
+    \item Define models of programming languages
+    \item Study strategies and implementation techniques for functional languages
+    \item Encode proofs in a variety of logics
+    \item Design automatic theorem provers and proof assistants.
+\end{itemize} 
+
+\subsection{Syntax}
+Assume an infinite set $X$ of variables denoted by $x,y,z,\ldots$, then the set
+of $\lambda$-terms is the least set satisfying:
+
+$$
+M::=X|(\lambda X.M) | (MM)
+$$
+
+Which are called variable, abstract, and application.
+
+Examples:
+
+\begin{align}
+&x \\
+&(\lambda y.y) \\
+&(\lambda x.(\lambda y.x)) \\
+&((\lambda z.z)(\lambda y.y))
+\end{align}
+
+An intuition:
+
+\begin{align}
+f & : x,y \to x + y \\
+f & : x \to \lambda y.x + y \\
+f & \to \lambda x.\lambda y.x + y
+\end{align}
+
+\subsection{Conventions}
+Write as few parentheses as possible:
+$$
+(\lambda y.(xy)) = \lambda y.xy
+$$
+
+Application associates to the left:
+$$
+xyz = ((xy)z)
+$$
+
+Abstractions bind as far as possible to the right:
+$$
+\lambda x.(\lambda y.y)x = (\lambda x.((\lambda y.y)x))
+$$
+
+Abstractions can be abbreviated:
+$$
+\lambda x.\lambda y.M = \lambda xy.M
+$$
+
+A lambda term in Haskell syntax:
+\begin{lstlisting}
+\x -> M
+\end{lstlisting}
+
+\ldots is the same as: $\lambda x.M$
+
+\subsection{Variables}
+A variable is a free term in a $\lambda$-term if it is not bound by a $\lambda$.
+
+More precisely, the set of free variables of a term is defined as:
+
+\begin{align}
+FV(x) &= {x} \\
+FV(\lambda x.M) &= FV(M)-{x} \\
+FV(MN) &= FV(M) \cup FV(N)
+\end{align}
+
+
+Terms without free variables are called closed terms.
+
+(I definitely know what's going on)

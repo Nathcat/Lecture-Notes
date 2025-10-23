@@ -92,3 +92,178 @@ which is a member of $B$, i.e. $f(x)\in B$.
 
 In Haskell, the type of a function is describe as a sequence of the types involved in
 its reduction steps.
+
+\subsection{Notation}
+Application os denoted by juxtaposition: $(f x)$, for example. In order to avoid writing too many brackets the
+convention is such that we should not write outermost brackets. Haskell's typical evaluation order
+will prioritise the application before other operations:
+
+\begin{lstlisting}
+square 3 + 1
+-- Is equivalent to...
+(square 3) + 1
+\end{lstlisting}
+
+Application will also associate to the left:
+\begin{lstlisting}
+square square 3
+-- means
+(square square) 3 
+\end{lstlisting}
+
+
+\subsubsection{Definition of functions}
+Functions are defined in terms of equations:
+
+\begin{lstlisting}
+square x = x * x
+min x y = if x <= y then x else y
+
+-- We may also create conditional / guarded equations (piecewise function)
+min x y
+	| x <= y 	= x
+	| x > y 	= y
+
+sign x
+	| x < 0		= -1
+	| x == 0	= 0
+	| x > 0 	= 1
+\end{lstlisting}
+
+\subsubsection{Recursive definitions}
+A function may als be defined recursively.
+
+\begin{lstlisting}
+fact :: Integer -> Integer
+fact n = if n == 0 then 1 else n * (fact(n-1))
+\end{lstlisting}
+
+These are evaluated in the same way, through simplification of the given
+expression:
+
+\begin{lstlisting}
+fact 0 
+	-> if 0 == 0 then 1 else 0 * (fact(0-1)) 
+	-> if True then 1 else 0 * (fact(0-1))
+	-> 1
+\end{lstlisting}
+
+Note how the conditional is evaluated: evaluate the condition -> if true evaluate the left branch (then), otherwise evaluate the right branch (else).
+Given this, the only valid reduction sequence for $fact(0)$ is the one shown above, and this program terminates.
+
+The expression $fact(-1)$ however, does not terminate. We could instead create a conditional function which covers these
+extraneous cases:
+
+\begin{lstlisting}
+fact :: Integer -> Integer
+fact n
+	| n > 0		= n * (fact (n-1))
+	| n == 0	= 1
+	| n < 0		= error "negative argument"
+\end{lstlisting}
+
+Note that $error$ is a predefined function which causes immediate termination of the evaluator, with the given message.
+
+\subsubsection{Local definition}
+We may use the $let$ and $where$ terms to introduce local definitions, which are only valid on the right hand side of the equation that we 
+are writing:
+
+\begin{lstlisting}
+f x = a + 1 where a = x / 2
+-- or
+f x = let a = x / 2 in a + 1
+
+-- Several definitions
+f x = square (successor x) where
+	square z =  z * z ; successor x = x + 1
+\end{lstlisting}
+
+\subsubsection{Arithmetic functions}
+Arithmetic operations are also functions, used in infix notation: $3+4$,
+but we may also use them in prefix notation: $(+) 3 4$.
+
+Again, application has priority:
+\begin{lstlisting}
+square 1 + 4 * 2
+-- means
+(square 1) + (4 * 2)
+\end{lstlisting}
+
+\subsubsection{Function composition}
+Functions may also be composed. The action of composition itself is a predefined function:
+
+\begin{lstlisting}
+(.) :: (b -> c) -> (a -> b) -> a -> c
+(f . g) x = f (g x)
+\end{lstlisting}
+
+Note that only functions whose types match may be composed:
+\begin{lstlisting}
+square :: Integer -> Integer
+quad = square . square
+\end{lstlisting}
+
+\subsubsection{Types}
+Static typing provides a way to find errors in advance. Expressions that cannot be assigned a type
+are considered erroneous, and are rejected by the compiler.
+
+Haskell also allows the programmer to define new types.
+
+While a program which passes type checks is more likely to be correct, it is not a guarantee of
+logical correctness.
+
+\subsubsection{Polymorphism}
+Type systems can be \textit{monomorphic}, in which every expression has at most one type, or
+they can be \textit{polymorphic}, in which expressions can have more than one type.
+
+An example of this is in the composition function:
+\begin{lstlisting}
+(.) :: (b -> c) -> (a -> b) -> a -> c
+\end{lstlisting}
+
+Where $a$, $b$, and $c$ are \textit{type variables}. They can be instantiated to different types in
+different contexts, and therefore $(.)$ is a polymorphic function.
+
+Formally, polymorphic types are defined as a set of terms built out of type variables and type constructors,
+which are either atmoic, or take arguments. A polymorhphic type represents the set of its instances, obtained
+by substituting type variables by types.
+
+Function overloading is a related notion, where several functions with different types, may share the same name.
+
+\subsubsection{Type inference}
+Most modern languages do not require the programmer to explicitly declare the type of an expression,
+they are able to infer the type, if one exists.
+
+The expression is decomposed into smaller sub-expressions, and when an atomic expression is found, the available
+information is taken from the predefinied constant that forms the expression, or if it is not a predefined expression,
+the most general type possible is assigned to it. The way that different components are put together to form the expression
+indicates the constraints that the type variables must satisfy.
+
+For example:
+\begin{lstlisting}
+square x = x * x
+
+square square 3
+-- This expression is rejected, since the inferred type of square is
+square :: Integer -> Integer
+-- ... and therefore its argument cannot be a function.
+\end{lstlisting}
+
+\subsubsection{Disjoint sums}
+We can define several constructors in a type:
+\begin{lstlisting}
+data Nat = Zero | Succ Nat
+\end{lstlisting}
+
+$Zero$ and $Succ$ are constructors. In this case they are not polymorphic, but we can define
+polymorphic constructors.
+
+\begin{lstlisting}
+data Seq a = Empty | Cons a (Seq a)
+\end{lstlisting}
+
+The constructors are $Empty$ and $Cons$, and are polymorphic.
+
+Constructors are used to build terms, what distinguishes a constructor from a function is that
+there is no definition associated to a constructor, and constructors can be used in patterns.
+
