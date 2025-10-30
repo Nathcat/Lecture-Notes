@@ -81,4 +81,70 @@ FV(MN) &= FV(M) \cup FV(N)
 
 Terms without free variables are called closed terms.
 
-(I definitely know what's going on)
+We may also define the set of bound variables as:
+\begin{align}
+BV(x)&=\emptyset
+BV(\lambda x.M)&=\{x\}\cup BV(M)
+BV(MN) &= BV(M)\cup BV(N)
+\end{align}
+
+A variable is \textit{bound} by a lambda term, if it is not linked to a lambda term then it is
+a free variable.
+
+\subsection{alpha-conversion}
+Lambda terms that differ only in the names of their bound variables will be equated. More precisely, if $y$ is not free in $M$:
+
+$$
+\lambda x.M =_\alpha \lambda y.M\{X\mapsto y\}
+$$
+
+Where $M\{x\mapsto y\}$ is the term $M$ where each occurence of $x$ is replaced by $y$,
+i.e. we rename every free occurrence of $x$ to $y$.
+
+Lambda terms are defined module $\alpha$ conversion, so $\lambda x.x$ and $\lambda y.y$ are the same term.
+$\alpha$ equivalent terms represent the same computation.
+
+\subsection{Computation}
+Abstractions represent functions, which can be applied to arguments. The main computation rule is $\beta$-reduction, which indivates
+how to find the result of the function for a given argument.
+
+A \textit{redex} is a term of the form $(\lambda x.M)N$, it reduces to the term $M\{x\mapsto N\}$ where $M\{x\mapsto N\}$ is the term
+obtained when we substitute $x$ by $N$ taking into account bound variables.
+
+\subsubsection{beta-reduction}
+$$
+(\lambda x.M)N\to_\beta M\{x\mapsto N\}
+$$
+
+Note that we use the word \textit{reduce}, but this does not necessarily simplify the term. We are only removing
+a layer of abstraction.
+
+$$
+M\to_\beta M_1\to_\beta M_2\ldots M_n = M\to_\beta^* M_n
+$$
+
+\subsection{Substitution}
+Substitution is a special kind of replacement: $M\{x\mapsto N\}$ means replace all \textit{free} occurrences of $x$ in $M$ by the term $N$.
+
+A very useful property of substitution is the Substitution Lemma:
+
+If $x\notin FV(P)$:
+\begin{equation}
+    (M\{x\mapsto N\})\{y\mapsto P\} = (M\{y\mapsto P\})\{x\mapsto N\{y\mapsto P\}\}
+\end{equation}
+
+\subsection{Normal forms}
+When do we stop reducing?
+
+We stop reducing when we reach the \textit{Normal form (NF)}, i.e. when there are not more redexes left to reduce.
+A normal form then is a term which does not contain any redex. A term that can be reduced to a normal form is said to be
+normalisable.
+
+\begin{equation}
+    (\lambda x.a(\lambda y.xy))bc\to_\beta a(\lambda y.by)c
+\end{equation}
+
+Which is a normal form (application associates to the left).
+
+\textit{Weak Head Normal Form} --- Stop reducing when there are no redexes left, but without reducing under an abstraction.
+    

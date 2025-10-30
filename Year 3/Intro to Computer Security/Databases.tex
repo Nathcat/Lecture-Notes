@@ -1,0 +1,68 @@
+\section{Database Security}
+There is a dramatic imbalance between the complexity of modern DBMS' and 
+the security techniques used to protect these critical systems. An effective
+databases security protocol requires a strategy based on a full understanding
+of the security vulnerabilities of the interaction protocol, SQL, something which
+a typical organisation lacks the personnel to achieve.
+
+Most enterprise environments consist of a heterogenous mixture of database platforms,
+enterprise platforms, and OS platforms, creating an additional complexity hurdle
+for security personnel.
+
+\subsection{SQL Injection Attacks (SQLi)}
+The most common attack goal of an SQL injection attack is to extract data in
+bulk from the database. It could also potentially be used to modify or delete data,
+execute arbitrary commands, or launch DoS attacks.
+
+The main idea is that the attacker sends malicious SQL commands to the database server,
+exploiting the behaviour of the web page interface.
+
+The typical method is to permaturely terminate a text string within the input,
+and append a new command. The assumption is that the webpage will construct the query
+to the database by simply concatenating each part of the command with the user's input.
+
+An SQL injection attack can come from many avenues:
+\begin{itemize}
+    \item User input
+    \item Server variables
+    \item Second-order injection
+    \item Cookies
+    \item Physical user input
+\end{itemize}
+
+\subsection{Inband attacks}
+This kind of attack uses the same communication channel for injecting SQL code and
+retrieving results. The retrieved data is presented directly in the application's
+web page.
+
+\begin{itemize}
+    \item Tautology --- Injects code in one or more condition statements so that they always evaluate to true.
+    \item End of line comment --- After injecting code into a particular field, legitimate code that follows is nullified through usage of end of line comments.
+    \item Piggybacked queries --- The attacker adds additional queries beyond the intended query, piggy-backing the attack on top of a legitimate request.
+\end{itemize}
+
+\subsection{Inferential attack}
+In this kind attack there is no actual transfer of data, but the attacker is able to reconstruct
+the information by sending particular requests and observing the resulting behaviour of the website / database server.
+
+\begin{itemize}
+    \item Illegal / logicall incorrect queries --- This attack lets an attacker gather important information about the type and structure of the backend database of a web application, and is considered a preliminary, information gathering step for other attacks.
+    \item Blind SQL injection --- Allows attackers to infer the data present in a database system, even when the system is sufficiently secure to not display any erroneous information back to the attacker, by injecting statements which are true or false. False terminates the query and reveals internal structure.
+\end{itemize}
+
+Inference detection can be done during the design of the database, by altering the design of the database and changing access control regimes to eliminate
+inference channels, or at query time, if an inference channel is found in a query, it is either denied or altered.
+
+\subsection{Out-of-band attack}
+Data is retrieved using a different channel.
+
+This can be done when there are limitations on information retrieval, but outbound connectivity
+from the database server is lax. The results might be returned in an email, for example.
+
+\subsection{SQL injection countermeasures}
+\begin{itemize}
+    \item Defensive coding
+    \item Detection
+    \item Run-time prevention
+\end{itemize}
+
