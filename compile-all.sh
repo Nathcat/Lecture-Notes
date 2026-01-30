@@ -55,3 +55,11 @@ cd ../..
 cd "Year 3/Comparative Programming"
 latex2html "Comparative-Programming.tex" -dir "../../html/Year 3/G6021-Comparative-Programing" -mkdir
 cd ../..
+
+#
+#   G5015 - Neural Networks
+#
+
+cd "Year 3/Neural Networks"
+latex2html "Neural-Networks.tex" -dir "../../html/Year 3/G5015-Neural-Networks" -mkdir
+cd ../..
