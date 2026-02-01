@@ -1,0 +1,74 @@
+\subsection{Vectors}
+
+Vectors are a way of describing variables which contain multiple dimensions. It is commonly said
+that they have both direction and magnitude, while \textit{scalar} values have only magnitude.
+
+They can be used in many scenarios, but the most common is probably to describe a point, or a transformation in
+an $N$ dimensional space.
+
+A key point is that vectors are effectively matrices in the context of linear algebra. By which I mean they
+are presented in the same way, and can be combined (and often are) in the same calculations one might find
+matrices.
+
+The main difference between a vector and a matrix, is that where matrices can have any number of columns or rows,
+a vector will have either one row, or one column.
+
+The shape of a matrix is often given by:
+\begin{equation}
+	\textrm{rows}\times \textrm{columns}
+\end{equation}
+
+... so while a matrix might be $M\times N$, a vector will either be $1\times N$, or $N\times 1$.
+
+If a system makes use of vectors which are presented as a row ($1\times N$), they are called \textit{row major systems}.
+It follows then that a system which presents vectors as columns ($N\times 1$), are called \textit{column major systems}.
+
+\subsubsection{Operations with vectors}
+Vectors follow the same operational rules as matrices, but they have some special operations.
+
+The magnitude of a vector with $N$ dimensions, is given by:
+\begin{equation}\label{vector-magnitude}
+	|\vec{a}| = \sqrt{\sum^N_{n=1}\vec{a}_n^2}
+\end{equation}
+
+A vector $\vec{a}$ is a unit vector, if it satisfies $|\vec{a}|=1$. The unit vector, or simply put, the direction
+of a vector, can be found by \textit{normalising} said vector:
+
+\begin{equation}\label{vector-normalisation}\begin{split}
+		& \textrm{Let }\vec{b}\textrm{ be a vector with magnitude }>1 \\
+		& \hat{\vec{b}} = \frac{\vec{b}}{|\vec{b}|}
+	\end{split}\end{equation}
+
+Note that one may perform the above division, simply by dividing all the elements of vector dividend, by the scalar divisor.
+
+The dot product is \textit{effectively} a measure of how different two vectors $\vec{a},\vec{b}$ are. (Note that
+$\vec{a}$ is notation for a vector named $a$). It forms a relation between the components of the vector,
+and the \textit{acute} angle between them $\theta$.
+
+\begin{equation}\label{dot-product}\begin{split}
+		& \textrm{Let }N\textrm{ be the number of dimensions} \\
+		\vec{a}\cdot\vec{b} & \\
+		&= |\vec{a}|\times|\vec{b}|\times\cos(\theta) \\
+		&= \sum^N_{n=1}\vec{a}_n\vec{b}_n
+	\end{split}\end{equation}
+
+The cross product, allows you to find the vector which is perpendicular to two vectors. Note that $\vec{n}$
+is the unit vector perpendicular to the two vectors $\vec{a}$ and $\vec{b}$.
+\begin{equation}\label{cross-product}\begin{split}
+		\vec{a}\times\vec{b} & \\
+		&= |\vec{a}|\times|\vec{b}|\times\sin(\theta)\times\vec{n}
+	\end{split}\end{equation}
+
+You may ask youself, `but Nathan, that's stupid! You're saying that to find the perpendicular vector to two vectors,
+you need the perpendicular unit vector!`, and you would be correct. The cross product is, for reasons I cannot
+be asked to understand or explain, only defined to be non-zero in three and seven dimensions. As such, we have the
+following if both $\vec{a}$ and $\vec{b}$ have three dimensions:
+
+\begin{equation}
+	\vec{a}\times\vec{b} = \left[\begin{matrix}
+			\vec{a}_y\vec{b}_z - \vec{a}_z\vec{b}_y \\
+			\vec{a}_z\vec{b}_x - \vec{a}_x\vec{b}_z \\
+			\vec{a}_x\vec{b}_y - \vec{a}_y\vec{b}_x
+		\end{matrix}\right]
+\end{equation}
+
