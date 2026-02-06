@@ -1,6 +1,7 @@
 \documentclass[a4paper]{article}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{amssymb}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
@@ -17,6 +18,8 @@
 \definecolor{gray}{rgb}{0.5, 0.5, 0.5}
 \definecolor{mauve}{rgb}{0.58, 0, 0.82}
 
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
 \title{G5015 --- Comparative Programming}
 \author{Dr. James Bennet \and Notes by Nathan Baines}
 \date{Academic year 2025/26}
@@ -29,4 +32,118 @@
 \include{linear-algebra/linear-models.tex}
 \include{linear-algebra/vectors.tex}
 
+\appendix
+\section{Lab 2 --- Question 2}
+We found this question quite challenging in my group, so after having managed to prove it, I will display said proof here.
+
+The question was as follows:
+\begin{equation}\begin{split}
+		&\textrm{The classification boundary of a perceptron model is given by}                    \\
+		&\mathbf{w}^T\mathbf{x}+b=0                                                                \\
+		&\textrm{Show that the shortest distance between this boundary and the origin is given by} \\
+		&\frac{b}{\norm{\mathbf{w}}}
+	\end{split}\end{equation}
+
+Firstly, it is worth noting that the expression given for the boundary, is a simple euclidean form line equation, represented using vectors.
+$\mathbf{w}$ is a vector containing the coefficients of the equation, and $\mathbf{x}$ contains the variables of the equation.
+
+Let us suppose, that this is a simple $y=mx+c$ form equation, if this is to be the case then we must define the following for $\mathbf{w}$ and $\mathbf{x}$.
+\begin{equation}
+	\mathbf{w}=\left(\begin{matrix}w_0 \\ w_1\end{matrix}\right),
+	\mathbf{x}=\left(\begin{matrix}x \\ y\end{matrix}\right)
+\end{equation}
+
+We can then see that,
+\begin{equation}\begin{split}
+		\mathbf{w}^T\mathbf{x}+b=0 &\to \left(\begin{matrix}w_0 & w_1\end{matrix}\right)\left(\begin{matrix}x \\ y\end{matrix}\right)+b=0 \\
+		&\to w_0x + w_1y + b = 0 \\
+		&\to w_1y = -w_0x-b \\
+		&\to y = -\frac{w_0}{w_1}x-\frac{b}{w_1}
+	\end{split}\end{equation}
+
+This is now in a more obvious form of the euclidean line equation ($m=-\frac{w_0}{w_1}$, $c=-\frac{b}{w_1}$), a form we can work with much more easily.
+
+The aim of the question is to find the shortest distance between this line, and the origin $(0, 0)$. This can be found by
+finding the perpendicular line which passes through \textit{both} our boundary, and the origin, then finding the point
+where this perpendicular line intercepts the boundary, and then finding the distance of that point from the origin, which
+will simply be the euclidean norm: $\sqrt{x^2+y^2}$.
+
+It is known that for a line $y=mx+c$, a perpendicular line passing through said line would be of the form $y=-\frac{1}{m}x+c_1$.
+Remember that $c$ indicates the point at which a line passes through the y-axis (the y-intercept), and $m$ is the gradient of the line.
+
+Given this knowledge, we can see that the line perpendicular to our boundary must have a gradient of $\frac{w_1}{w_0}$, i.e. $m=\frac{w_1}{w_0}$.
+
+\begin{equation}
+	y_p=\frac{w_1}{w_0}x+c
+\end{equation}
+
+Note that I am using $y_p$ to refer to perpendicular line, this is not a commonly used notation (to my knowledge), just something I like
+to do to make my work a little clearer.
+
+Now we must find $c$, the y-intercept. Remember that this line \textit{must pass through the origin}, so at some point along it, we will have
+$y=0$, and $x=0$, so let us substitute these values, and solve for $c$:
+
+\begin{equation}
+	0=\frac{w_1}{w_0}(0)+c \to c=0
+\end{equation}
+
+We have $c$. Note that $c=0$ is commonplace when a line must pass through the origin, since it intercepts the y-axis at $y=0$.
+
+Given what we have found, we can now see that the perpendicular line to our boundary which passes through the origin has the euclidean form:
+\begin{equation}
+	y=\frac{w_1}{w_0}x
+\end{equation}
+
+The next step, is to find the point where this line intercepts our boundary line, and for this, we will approach the problem with simultaneous equations.
+
+When the lines intercept, they will have the same values of $x$ and $y$, so we can begin by simply setting them equal to each other (since they are equal
+at the point of intercept!), and solving for $x$. We solve for $x$, since this will give us the $x$ ordinate of their intercept point. We can then substitute
+that value back into one of the original line equations to find the $y$ ordinate.
+
+\begin{equation}\begin{split}
+		\frac{w_1}{w_0}x &= -\frac{w_0}{w_1}x-\frac{b}{w_1} \\
+		\to \frac{w_1^2}{w_0}x &= -w_0x-b \\
+		\to \frac{w_1^2}{w_0}x+w_0x &= -b \\
+		\to \frac{w_1^2+w_0^2}{w_0}x &= -b \\
+		\to x &= \frac{-bw_0}{w_0^2+w_1^2} \\ \\
+		&\textrm{Now we substitute back into our original equations to find }y \\
+		y &= \frac{w_1}{w_0}x \\
+		\to y &= \frac{w_1}{w_0}\cdot\frac{-bw_0}{w_0^2+w_1^2} \\
+		\to y &= \frac{-bw_0w_1}{w_0\left(w_0^2+w_1^2\right)} \\
+		\to y &= \frac{-bw_1}{\left(w_0^2+w_1^2\right)} \\ \\
+		&\textrm{Thus we have our point of intercept, } \\
+		I &= \left(\begin{matrix}
+				\frac{-bw_0}{w_0^2+w_1^2} & \frac{-bw_1}{w_0^2+w_1^2}
+			\end{matrix}\right)
+	\end{split}\end{equation}
+
+And now, for the cool bit. If you thought the rest of this was cool, the coolest bit is yet to come.
+
+You might be thinking, `But Nathan, how does this coalesce into the answer?`, just you wait... just you wait.
+This final bit is one of those moments that made me actually \textit{gasp} in excitement when I saw it. Because the
+equation itself looks very scary, but its such an elegant simplification.
+
+We now calculate $\norm{I}$, the euclidean norm of our intercept point $I$.
+
+\begin{equation}\begin{split}
+		\norm{I} &= \sqrt{
+			\left(\frac{-bw_0}{w_0^2+w_1^2}\right)^2+\left(\frac{-bw_1}{w_0^2+w_1^2}\right)^2
+		} \\
+		\norm{I} &= \sqrt{
+			\frac{b^2w_0^2}{\left(w_0^2+w_1^2\right)^2}+\frac{b^2w_1^2}{\left(w_0^2+w_1^2\right)^2}
+		} \\
+		\norm{I} &= \sqrt{
+			\frac{b^2w_0^2+b^2w_1^2}{\left(w_0^2+w_1^2\right)^2}
+		} \\
+		\norm{I} &= \sqrt{
+			\frac{b^2\left(w_0^2+w_1^2\right)}{\left(w_0^2+w_1^2\right)^2}
+		} \\
+		\norm{I} &= \sqrt{
+			\frac{b^2}{w_0^2+w_1^2}
+		} \\
+		\norm{I} &= \frac{b}{\sqrt{w_0^2+w_1^2}} \\
+		\norm{\mathbf{w}}=\sqrt{w_0^2+w_1^2} \therefore \norm{I} &= \frac{b}{\norm{\mathbf{w}}}
+	\end{split}\end{equation}
+
+And we have our answer! So cool.
 \end{document}
