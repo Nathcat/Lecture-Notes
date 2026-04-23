@@ -10,3 +10,4 @@ html/Year*
 **/*.bcf
 **/*.blg
 **/*.run.xml
+*.toc

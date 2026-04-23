@@ -1,3 +1,4 @@
 \contentsline {part}{I\hspace {1em}Computability}{1}{part.1}%
 \contentsline {part}{II\hspace {1em}Complexity}{1}{part.2}%
 \contentsline {section}{\numberline {1}Measuring Time Usage}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Measuring in RAM \& CM}{2}{subsection.1.1}%
