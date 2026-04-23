@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}Linear Algebra}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Linear models}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Vectors}{3}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Operations with vectors}{3}{subsubsection.1.2.1}%
+\contentsline {section}{\numberline {A}Lab 2 --- Question 2}{5}{appendix.A}%

@@ -1,0 +1,67 @@
+\documentclass[a4paper]{article}
+\usepackage[labelfont=sf]{caption} 
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\usepackage{listings}
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0, 0.6, 0}
+\definecolor{gray}{rgb}{0.5, 0.5, 0.5}
+\definecolor{mauve}{rgb}{0.58, 0, 0.82}
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\newtheorem{definition}{Definition}
+
+\title{G5029 --- Limits of Computation}
+\author{Prof. Bernhard Reus \and Notes by Nathan Baines}
+\date{Academic year 2025/26}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\part{Computability}
+
+\part{Complexity}
+\section{Measuring Time Usage}
+
+\begin{definition}
+	For an imperative language $L$, the function $time^L:L_{program}\to L_{data}\to\mathbb{N}_\bot$ is defined as follows:
+	For any $p\in L_{program}$, and $d\in L_{data}$ we define
+
+	$$
+		time^L_p(d)=
+		\begin{cases}
+			t+1  & \textrm{ if }p\vdash s_1\to s_2\ldots\to s_t \textrm{ where } s_1=readin(d) \textrm{ and } s_t \textrm{ terminal} \\
+			\bot & \textrm{otherwise}
+		\end{cases}
+	$$
+\end{definition}
+\captionof{figure}{Unit-cost time measure}\label{def:unit-cost-time-measure}
+
+This is effectively a definition of basic steps in the program. The idea is that if a program
+consisting of $t$ unit steps terminates, we can give its unit-cost execution time as $t+1$.
+
+Notably the read input and write output is implicitly one step each.
+
+This function also captures the idea that the running time depends on the input data $d$.
+
+Is this model fair? It doesn't necessarily account for complex expressions like equality in while,
+or unbounded number size in registers under the RAM model. Given this, we may apply the Unit-cost
+time measure to TM, GOTO, and CM models, but not to while, SRAM, RAM.
+
+\subsection{Measuring in RAM \& CM}
+
+\end{document}
