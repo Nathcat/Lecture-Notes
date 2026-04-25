@@ -1,4 +1,20 @@
-\contentsline {part}{I\hspace {1em}Computability}{1}{part.1}%
-\contentsline {part}{II\hspace {1em}Complexity}{1}{part.2}%
-\contentsline {section}{\numberline {1}Measuring Time Usage}{1}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Measuring in RAM \& CM}{2}{subsection.1.1}%
+\contentsline {part}{I\hspace {1em}Computability}{1}{}%
+\contentsline {section}{\numberline {1}The While language}{2}{}%
+\contentsline {subsection}{\numberline {1.1}Encodings in $\mathbb {D}$}{2}{}%
+\contentsline {subsubsection}{\numberline {1.1.1}Lists}{2}{}%
+\contentsline {subsubsection}{\numberline {1.1.2}Booleans}{2}{}%
+\contentsline {subsubsection}{\numberline {1.1.3}Numbers}{3}{}%
+\contentsline {subsection}{\numberline {1.2}While language semantics}{3}{}%
+\contentsline {subsection}{\numberline {1.3}Stores}{3}{}%
+\contentsline {subsection}{\numberline {1.4}Semantics of commands}{3}{}%
+\contentsline {subsection}{\numberline {1.5}Core while and extensions}{4}{}%
+\contentsline {subsubsection}{\numberline {1.5.1}Macro calls}{4}{}%
+\contentsline {section}{\numberline {2}Programs as data objects}{4}{}%
+\contentsline {part}{II\hspace {1em}Complexity}{4}{}%
+\contentsline {section}{\numberline {3}Measuring Time Usage}{5}{}%
+\contentsline {subsection}{\numberline {3.1}Measuring in RAM \& CM}{5}{}%
+\contentsline {part}{III\hspace {1em}The hardness of problems}{5}{}%
+\contentsline {section}{\numberline {4}Rice's Theorem}{5}{}%
+\contentsline {section}{\numberline {5}The Halting Problem}{5}{}%
+\contentsline {subsection}{\numberline {5.1}While semi-decidability}{6}{}%
+\contentsline {section}{\numberline {6}$\mathbb {P}$ and $\mathbb {NP}$}{7}{}%
